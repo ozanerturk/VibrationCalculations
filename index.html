@@ -2,7 +2,8 @@
 <html>
 
 <head>
-  <title>My Sample Project</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
   <!-- data-main attribute tells require.js to load
              scripts/main.js after require.js loads. -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
@@ -11,22 +12,78 @@
 </head>
 
 <body>
-  <h1>Calc Signal</h1>
-  Select File <input type="file" id="file">
-  <table>
-    <thead>
-      <tr>
-        <td>Label</td>
-        <td>Value</td>
-      </tr>
-    </thead>
-    <tbody id="results">
+  <div clas="row">
+    <div class="quarter">
+      Select File <input type="file" id="file">
+      <div id="tester"></div>
+      <p>
+        You can also look at signal processing implementation in<a href="https://github.com/ozanerturk/VibrationCalculations/blob/main/signalProcessing.js"> javascript Tensorflow.js from here</a>
+      </p>
+    </div>
+    <div class="half">
+      File Schema
+      <pre>
+      {
+        "data":{
+          "accelerometer_x":[]
+          "accelerometer_y":[]
+          "accelerometer_z":[]
+        }
+      }
+      </pre>
+      Example file <a href="#" id="downloadSample" > click to download</a>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="full">
+      <table>
+        <thead>
+          <tr>
+            <td>Label</td>
+            <td>Value</td>
+          </tr>
+        </thead>
+        <tbody id="results">
 
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <script>
-
   </script>
+  <style>
+    .modebar {
+      display: none !important;
+    }
+
+    * {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .row {
+      clear: both;
+      padding-left: 15px;
+      ;
+      padding-right: 15px;
+    }
+
+    .full {
+      width: 100%;
+      float: left;
+    }
+
+    .half {
+      width: 50%;
+      float: left;
+    }
+
+    .quarter {
+      width: 25%;
+      float: left;
+    }
+  </style>
 </body>
 
 </html>

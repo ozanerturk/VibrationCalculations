@@ -3,11 +3,22 @@ define(function (require) {
     // with a relative require call,
     // like:
     let file = document.getElementById("file");
+    let downloadSample = document.getElementById("downloadSample");
     let results = document.getElementById("results");
 
     var signalProcessor = require('./signalProcessing')({ tf: tf });
+    var exampleData = require('./signaldata');
     const reader = new FileReader();
 
+    downloadSample.addEventListener("click",()=>{
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exampleData));
+            var downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href",     dataStr);
+            downloadAnchorNode.setAttribute("download", "6000Hz_100Hz" + ".json");
+            document.body.appendChild(downloadAnchorNode); // required for firefox
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+    })
 
     file.addEventListener("change", (event) => {
         const fileList = event.target.files;
