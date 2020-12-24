@@ -31,11 +31,16 @@ define(function (require) {
         let dataX = data.data.accelerometer_x
         let dataY = data.data.accelerometer_y
         let dataZ = data.data.accelerometer_z
+        let calibratedSamplingRate = parseInt(data.calibratedSamplingRate)
         results.innerHTML = "";
 
-        putResult("Grms_score X", signalProcessor.Grms_score(dataX))
-        putResult("Grms_score Y", signalProcessor.Grms_score(dataY))
-        putResult("Grms_score Z", signalProcessor.Grms_score(dataZ))
+        putResult("Grms X", signalProcessor.Grms_score(dataX))
+        putResult("Grms Y", signalProcessor.Grms_score(dataY))
+        putResult("Grms Z", signalProcessor.Grms_score(dataZ))
+
+        putResult("Vrms X", signalProcessor.Vrms_score(dataX,calibratedSamplingRate))
+        putResult("Vrms Y", signalProcessor.Vrms_score(dataY,calibratedSamplingRate))
+        putResult("Vrms Z", signalProcessor.Vrms_score(dataZ,calibratedSamplingRate))
 
         putResult("Clearance X", signalProcessor.Clearance(dataX))
         putResult("Clearance Y", signalProcessor.Clearance(dataY))
@@ -49,6 +54,10 @@ define(function (require) {
         putResult("Crest X", signalProcessor.Crest(dataX))
         putResult("Crest Y", signalProcessor.Crest(dataY))
         putResult("Crest Z", signalProcessor.Crest(dataZ))
+
+        putResult("Crest_star X", signalProcessor.Crest_star(dataX,calibratedSamplingRate))
+        putResult("Crest_star Y", signalProcessor.Crest_star(dataY,calibratedSamplingRate))
+        putResult("Crest_star Z", signalProcessor.Crest_star(dataZ,calibratedSamplingRate))
 
         putResult("Kurtosis X", signalProcessor.Kurtosis(dataX))
         putResult("Kurtosis Y", signalProcessor.Kurtosis(dataY))
