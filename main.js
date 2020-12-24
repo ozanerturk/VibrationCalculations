@@ -3,12 +3,17 @@ define(function (require) {
     // with a relative require call,
     // like:
     let file = document.getElementById("file");
+    let loader = document.getElementById("loader");
+    let results = document.getElementById("resultsBody");
     let downloadSample = document.getElementById("downloadSample");
-    let results = document.getElementById("results");
+    let resultsDom = document.getElementById("results");
 
     var signalProcessor = require('./signalProcessing')({ tf: tf });
     var exampleData = require('./signaldata');
     const reader = new FileReader();
+
+    loader.style="display:none";
+    resultsDom.style="display:none";
 
     downloadSample.addEventListener("click",()=>{
             var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exampleData));
@@ -23,16 +28,16 @@ define(function (require) {
     file.addEventListener("change", (event) => {
         const fileList = event.target.files;
         reader.readAsDataURL(fileList[0]);
+        loader.style="display:block";
+        resultsDom.style="display:none"
     })
-
     reader.addEventListener('load', (event) => {
-        console.log()
+    
         const data = JSON.parse(atob(event.target.result.split("data:application/json;base64,")[1]));
         let dataX = data.data.accelerometer_x
         let dataY = data.data.accelerometer_y
         let dataZ = data.data.accelerometer_z
         let calibratedSamplingRate = parseInt(data.calibratedSamplingRate)
-        results.innerHTML = "";
 
         putResult("Grms X", signalProcessor.Grms_score(dataX))
         putResult("Grms Y", signalProcessor.Grms_score(dataY))
@@ -62,6 +67,8 @@ define(function (require) {
         putResult("Kurtosis X", signalProcessor.Kurtosis(dataX))
         putResult("Kurtosis Y", signalProcessor.Kurtosis(dataY))
         putResult("Kurtosis Z", signalProcessor.Kurtosis(dataZ))
+        loader.style="display:none";
+        resultsDom.style="display:block";
     })
     function putResult(label, result) {
         results.appendChild(createElementFromHTML(`<tr><td>${label}</td><td>${result}</td></tr>`));

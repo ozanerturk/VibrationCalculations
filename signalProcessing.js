@@ -88,7 +88,8 @@ define(function () {
       return t_rebuilded_signal.arraySync();
     }
     function Crest_star(data,samplingRate) {
-      if (!data.length) return 0;
+      if(!samplingRate)return null;
+      if (!data.length) return null;
       let highpass_signal = highpass(data,samplingRate)
       let t_signal = tf.tensor1d(highpass_signal, "float32");
       let a1 = 1, a2 = 1, a3 = 1;
@@ -97,6 +98,7 @@ define(function () {
       return a1 * peek + a2 * grms + a3 * (peek / grms);
     }
     function Vrms_range_score(data, min, max, frequency) {
+      if(!frequency)return null;
       if (!data.length) return 0;
       var fft = Vrms(data, frequency).slice(min, max)
       fft = fft.slice(1, parseInt(fft.length / 2 + 1));

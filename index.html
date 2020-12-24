@@ -17,8 +17,24 @@
       Select File <input type="file" id="file">
       <div id="tester"></div>
       <p>
-        You can also look at signal processing implementation in<a href="https://github.com/ozanerturk/VibrationCalculations/blob/main/signalProcessing.js"> javascript Tensorflow.js from here</a>
+        You can also look at signal processing implementation in<a
+          href="https://github.com/ozanerturk/VibrationCalculations/blob/main/signalProcessing.js"> javascript
+          Tensorflow.js from here</a>
       </p>
+      <div style="width:30px; height:30px" id="loader" class="loader"></div>
+      <div class="full" id="results">
+        <table class="zui-table">
+          <thead>
+            <tr>
+              <td>Label</td>
+              <td>Value</td>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="half">
       File Schema
@@ -32,26 +48,9 @@
         }
       }
       </pre>
-      Example file <a href="#" id="downloadSample" > click to download</a>
+      Example file <a href="#" id="downloadSample"> click to download</a>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="full">
-      <table>
-        <thead>
-          <tr>
-            <td>Label</td>
-            <td>Value</td>
-          </tr>
-        </thead>
-        <tbody id="results">
-
-        </tbody>
-      </table>
-    </div>
-  </div>
-
   <script>
   </script>
   <style>
@@ -83,6 +82,55 @@
     .quarter {
       width: 25%;
       float: left;
+    }
+
+    .zui-table {
+      border: solid 1px #DDEEEE;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font: normal 13px Arial, sans-serif;
+    }
+
+    .zui-table thead th {
+      background-color: #DDEFEF;
+      border: solid 1px #DDEEEE;
+      color: #336B6B;
+      padding: 10px;
+      text-align: left;
+      text-shadow: 1px 1px 1px #fff;
+    }
+
+    .zui-table tbody td {
+      border: solid 1px #DDEEEE;
+      color: #333;
+      padding: 10px;
+      text-shadow: 1px 1px 1px #fff;
+    }
+
+    .zui-table tr:hover {
+      background: #f3f3f3;
+    }
+
+    .loader {
+      display: none;
+      border: 16px solid #f3f3f3;
+      /* Light grey */
+      border-top: 16px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </body>
